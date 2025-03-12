@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1出張！大学周辺ランチボックスフェア</title>
+    <title>出張！大学周辺ランチボックスフェア</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
@@ -16,7 +16,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">おなまえ (ふりがな)</label>
-            <input type="text" name="name_kana" required class="form-control" placeholder="例: やまだ たろう">
+            <input type="text" name="furigana" required class="form-control" placeholder="例: やまだ たろう">
         </div>
         <div class="mb-3">
             <label class="form-label">電話番号(当日連絡させていただく可能性があります)</label>
@@ -129,7 +129,7 @@
             let formData = {
                 lineId: lineId,
                 name: $("input[name='name']").val(),
-                nameKana: $("input[name='name_kana']").val(),
+                furigana: $("input[name='furigana']").val(),
                 phone: $("input[name='phone']").val(),
                 shop1: $("select[name='shop1']").val(),
                 shop2: $("select[name='shop2']").val(),
