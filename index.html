@@ -15,11 +15,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
-
         $(document).ready(function () {
             const liffId = "2007055649-5QBL971p";
             initializeLiff(liffId);
-        })
+        });
 
         function initializeLiff(liffId) {
             liff.init({
@@ -30,7 +29,20 @@
                 console.log('LIFF Initialization failed ', err);
             });
         }
-    </script>
 
+        function initializeApp() {
+            if (liff.isLoggedIn()) {
+                liff.getProfile()
+                    .then(profile => {
+                        alert("あなたのLINE IDは: " + profile.userId);
+                    })
+                    .catch((err) => {
+                        console.log('プロフィール取得エラー', err);
+                    });
+            } else {
+                liff.login();
+            }
+        }
+    </script>
 </body>
 </html>
