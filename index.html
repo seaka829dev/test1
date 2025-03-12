@@ -89,6 +89,10 @@
         $(document).ready(function () {
             const liffId = "2007055649-5QBL971p";
             initializeLiff(liffId);
+
+            $('#orderForm').submit(function(e){
+                e.preventDefault();
+                sendData();
         });
 
         function initializeLiff(liffId) {
@@ -129,8 +133,8 @@
             };
 
             $.ajax({
-                type: 'POST',
-                url: 'https://script.google.com/macros/s/AKfycbwFXORbTiUOSlNYxHaCN3fLAgAnn_ru9xjpbjPwDQzI8330TUULJBN6LeuG3gGSHCVE/exec',
+                type: "POST",
+                url: "https://script.google.com/macros/s/AKfycbwFXORbTiUOSlNYxHaCN3fLAgAnn_ru9xjpbjPwDQzI8330TUULJBN6LeuG3gGSHCVE/exec",
                 data: formData,
                 success: function(response) {
                     alert('注文が送信されました！');
