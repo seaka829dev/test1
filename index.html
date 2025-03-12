@@ -89,11 +89,6 @@
         $(document).ready(function () {
             const liffId = "2007055649-5QBL971p";
             initializeLiff(liffId);
-
-            $("#orderForm").submit(function (event) {
-                event.preventDefault();
-                sendData();
-            });
         });
 
         function initializeLiff(liffId) {
