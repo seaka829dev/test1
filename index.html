@@ -110,7 +110,8 @@
                 liff.getProfile()
                     .then(profile => {
                         lineUserId = profile.userId;
-                        $('#lineId').text("あなたのLINE IDは: " + profile.userId);
+                        $('#lineId').text("あなたのLINE IDは: " + lineUserId);
+                        alert(lineUserId);
                     })
                     .catch((err) => {
                         console.log('プロフィール取得エラー', err);
