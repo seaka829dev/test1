@@ -25,9 +25,10 @@
                 liffId: liffId
             }).then(() => {
                 initializeApp();
-                alert("initializeApp終了);
+                alert("initializeApp終了");
             }).catch((err) => {
                 console.log('LIFF Initialization failed ', err);
+                alert('LIFF Initialization failed '+err);
             });
         }
 
@@ -40,6 +41,7 @@
                     })
                     .catch((err) => {
                         console.log('プロフィール取得エラー', err);
+                        alert('プロフィール取得エラー'+err);
                     });
             } else {
                 liff.login();
