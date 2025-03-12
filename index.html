@@ -2,14 +2,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2出張！大学周辺ランチボックスフェア</title>
+    <title>9出張！大学周辺ランチボックスフェア</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
 </head>
 <body>
     <p id="lineId">LINE ID取得中...</p>
-    <form id="orderForm" class="mb-4">
+    <form method="post" class="mb-4">
         <div class="mb-3">
             <label class="form-label">名前</label>
             <input type="text" name="name" required class="form-control" placeholder="例: 山田 太郎">
@@ -84,15 +84,9 @@
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     
     <script>
-        let lineUserId = '';
-        
         $(document).ready(function () {
             const liffId = "2007055649-5QBL971p";
             initializeLiff(liffId);
-
-            $('#orderForm').submit(function(e){
-                e.preventDefault();
-                sendData();
         });
 
         function initializeLiff(liffId) {
@@ -109,9 +103,9 @@
             if (liff.isLoggedIn()) {
                 liff.getProfile()
                     .then(profile => {
-                        lineUserId = profile.userId;
-                        $('#lineId').text("あなたのLINE IDは: " + lineUserId);
-                        alert(lineUserId);
+                        alert("あなたのLINE IDは: " + profile.userId);
+                        $('#lineId').text("あなたのLINE IDは: " + profile.userId);
+
                     })
                     .catch((err) => {
                         console.log('プロフィール取得エラー', err);
@@ -120,31 +114,7 @@
                 liff.login();
             }
         }
-
-        function sendData() {
-            const formData = {
-                lineId: lineUserId,
-                name: $('[name="name"]').val(),
-                name_kana: $('[name="name_kana"]').val(),
-                phone: $('[name="phone"]').val(),
-                shop1: $('[name="shop1"]').val(),
-                shop2: $('[name="shop2"]').val(),
-                shop3: $('[name="shop3"]').val(),
-                shop4: $('[name="shop4"]').val(),
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "https://script.google.com/macros/s/AKfycbwFXORbTiUOSlNYxHaCN3fLAgAnn_ru9xjpbjPwDQzI8330TUULJBN6LeuG3gGSHCVE/exec",
-                data: formData,
-                success: function(response) {
-                    alert('注文が送信されました！');
-                },
-                error: function(error) {
-                    alert('注文の送信中にエラーが発生しました。');
-                }
-            });
-        }
     </script>
 </body>
 </html>
+
