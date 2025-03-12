@@ -9,7 +9,7 @@
 </head>
 <body>
     <p id="lineId">LINE ID取得中...</p>
-    <form method="post" class="mb-4">
+    <form id="orderForm" class="mb-4">
         <div class="mb-3">
             <label class="form-label">名前</label>
             <input type="text" name="name" required class="form-control" placeholder="例: 山田 太郎">
@@ -84,9 +84,16 @@
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     
     <script>
+        let lineId = "";
+        
         $(document).ready(function () {
             const liffId = "2007055649-5QBL971p";
             initializeLiff(liffId);
+
+            $("#orderForm").submit(function (event) {
+                event.preventDefault();
+                sendData();
+            }
         });
 
         function initializeLiff(liffId) {
@@ -103,8 +110,9 @@
             if (liff.isLoggedIn()) {
                 liff.getProfile()
                     .then(profile => {
-                        alert("あなたのLINE IDは: " + profile.userId);
-                        $('#lineId').text("あなたのLINE IDは: " + profile.userId);
+                        lineId = profile.userId;
+                        alert("あなたのLINE IDは: " + lineId);
+                        $('#lineId').text("あなたのLINE IDは: " + lineId);
 
                     })
                     .catch((err) => {
@@ -113,6 +121,34 @@
             } else {
                 liff.login();
             }
+        }
+
+        function sendData() {
+            let formData = {
+                lineId: lineId,
+                name: $("input[name='name']").val(),
+                name_kana: $("input[name='name_kana']").val(),
+                phone: $("input[name='phone']").val(),
+                shop1: $("select[name='shop1']").val(),
+                shop2: $("select[name='shop2']").val(),
+                shop3: $("select[name='shop3']").val(),
+                shop4: $("select[name='shop4']").val()
+            };
+
+            // データをサーバーに送信
+            $.ajax({
+                url: "https://script.google.com/macros/s/AKfycbwFXORbTiUOSlNYxHaCN3fLAgAnn_ru9xjpbjPwDQzI8330TUULJBN6LeuG3gGSHCVE/exec", // 送信先のURLを指定
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    alert("注文が送信されました！");
+                },
+                error: function (error) {
+                    alert("注文の送信に失敗しました。もう一度お試しください。");
+                }
+            });
+
         }
     </script>
 </body>
