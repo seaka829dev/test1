@@ -27,27 +27,22 @@
                 liffId: liffId
             }).then(() => {
                 initializeApp();
-                alert("initializeApp終了");
             }).catch((err) => {
                 console.log('LIFF Initialization failed ', err);
-                alert("LIFF Initialization failed");
             });
         }
 
         function initializeApp() {
             if (liff.isLoggedIn()) {
-                alert("getProfileスタート");
                 liff.getProfile()
                     .then(profile => {
                         alert("あなたのLINE IDは: " + profile.userId);
                     })
                     .catch((err) => {
                         console.log('プロフィール取得エラー', err);
-                        alert("プロフィール取得エラー");
                     });
             } else {
                 liff.login();
-                alert("ログイン");
             }
         }
     </script>
